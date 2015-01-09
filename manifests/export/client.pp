@@ -1,25 +1,31 @@
-##
+#
 # == Define: nfs::export::client
 # 
-# Definition for the NFS export client-specific configuration. If you need options for 
-# multiple clients, first use nfs::export and then add nfs::export::client with the same path.
+# Definition for the NFS export client-specific configuration. If you need 
+# options for multiple clients, first use nfs::export and then add 
+# nfs::export::client with the same path.
 #
 # == Arguments
 #
-# path: The exported path, should be already defined with nfs::export
-# client: The client specifier, for example '*' or '192.168.0.0/16'
-# options: Array of client-specific options, for example ['rw', 'root_squash']
+# [*path*]
+#   The exported path, should be already defined with nfs::export
+# [*client*]
+#   The client specifier, for example '*' or '192.168.0.0/16'
+# [*options*]
+#   Array of client-specific options, for example ['rw', 'root_squash']
 #
 # == Authors
 #
 # Mikko Vilpponen <vilpponen@protecomp.fi>
-##
-define nfs::export::client(
+#
+define nfs::export::client
+(
     $path,
     $client,
     $options,
     $ensure = 'present',
-) {
+)
+{
     if $ensure == 'present' {
         # Make sure the client specifier is in place
         augeas { $title:
@@ -27,8 +33,9 @@ define nfs::export::client(
             changes => [
                         "set client[. = ${client}] ${client}",
                         ],
-            require => Augeas["export ${path}"],
+            require => Nfs::Export::Path[$path],
             notify  => Exec['nfs-reload'],
+
         }
         # Convert options array to augeas commands
         $options_command_array = regsubst($options, '(.*)', "set option[. = '\1'] \1")
@@ -57,5 +64,4 @@ define nfs::export::client(
             notify  => Exec['nfs-reload'],
         }
     }
-
 }

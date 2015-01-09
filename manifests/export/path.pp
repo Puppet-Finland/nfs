@@ -1,4 +1,4 @@
-##
+#
 # == Define: nfs::export::path
 # 
 # Definition for the directory side in nfs export.
@@ -12,13 +12,15 @@
 # == Authors
 #
 # Mikko Vilpponen <vilpponen@protecomp.fi>
-##
-define nfs::export::path(
+#
+define nfs::export::path
+(
     $client,
-    $ensure = 'present',
-) {
+    $ensure = 'present'
+)
+{
     if $ensure == 'present' {
-        augeas{ "export ${title}":
+        augeas{ "nfs export ${title}":
             context => "/files/etc/exports",
             changes => [
                         "set dir[. = '${title}'] ${title}",
@@ -27,7 +29,7 @@ define nfs::export::path(
             notify  => Exec['nfs-reload'],
         }
     } else {
-        augeas{ "export ${title}":
+        augeas{ "nfs export ${title}":
             context => "/files/etc/exports",
             changes => [
                         "rm dir[. = '${title}']",

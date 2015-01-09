@@ -1,4 +1,4 @@
-##
+#
 # == Class: nfs::server
 # 
 # Installs and configures NFS server
@@ -6,9 +6,11 @@
 # == Authors
 #
 # Mikko Vilpponen <vilpponen@protecomp.fi>
-##
-class nfs::server(
+#
+class nfs::server
+(
     $exports = {}
+
 ) inherits nfs::params 
 {
 
