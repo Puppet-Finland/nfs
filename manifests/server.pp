@@ -15,10 +15,10 @@ class nfs::server
 {
 
     create_resources('nfs::export', $exports)
-    
+
     include nfs::install
 
-	include nfs::server::install
-	include nfs::server::config
+    include nfs::server::install
+    include nfs::server::config
     include nfs::server::service
 }

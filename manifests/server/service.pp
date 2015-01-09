@@ -9,11 +9,11 @@
 ##
 class nfs::server::service inherits nfs::params {
 
-	service {'nfs-server':
-		name   => $::nfs::params::nfs_server_service,
-		ensure => 'running',
-		enable => 'true',
-	}
+    service {'nfs-server':
+        name   => $::nfs::params::nfs_server_service,
+        ensure => 'running',
+        enable => 'true',
+    }
 
     exec {'nfs-reload':
         command     => "exportfs -a",

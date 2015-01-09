@@ -30,7 +30,7 @@ define nfs::export
     $ensure = 'present'
 )
 {
-	nfs::export::path { $title:
+    nfs::export::path { $title:
         client => $client,
         ensure => $ensure,
     }

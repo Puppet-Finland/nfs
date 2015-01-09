@@ -8,5 +8,5 @@
 # Mikko Vilpponen <vilpponen@protecomp.fi>
 #
 class nfs {
-	include nfs::install
+    include nfs::install
 }
