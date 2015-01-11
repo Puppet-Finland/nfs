@@ -11,7 +11,7 @@ class nfs::server
 (
     $exports = {}
 
-) inherits nfs::params 
+) inherits nfs::params
 {
 
     create_resources('nfs::export', $exports)

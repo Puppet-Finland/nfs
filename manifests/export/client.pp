@@ -38,9 +38,11 @@ define nfs::export::client
 
         }
         # Convert options array to augeas commands
-        $options_command_array = regsubst($options, '(.*)', "set option[. = '\1'] \1")
+        $options_command_array = regsubst($options, '(.*)', \
+                "set option[. = '\1'] \1")
 
-        # Then, add extra command to remove all non-specified options. Format and join options array as:
+        # Then, add extra command to remove all non-specified options. 
+        # Format and join options array as:
         # ['opt_1', 'opt_2', ... 'opt_n']  =>
         # ". != 'opt_1' and . != 'opt_2' and ... and . != 'opt_n'"
 
@@ -57,7 +59,7 @@ define nfs::export::client
     }
     else {
         augeas{ $title:
-            context => "/files/etc/exports",
+            context => '/files/etc/exports',
             changes => [
                         "remove dir[. = '${title}']/client[. = ${client}]",
                         ],

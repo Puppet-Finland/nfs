@@ -21,16 +21,16 @@ define nfs::export::path
 {
     if $ensure == 'present' {
         augeas{ "nfs export ${title}":
-            context => "/files/etc/exports",
+            context => '/files/etc/exports',
             changes => [
-                        "set dir[. = '${title}'] ${title}",
-                        "set dir[. = '${title}']/client[. = '${client}'] ${client}",
-                        ],
+                "set dir[. = '${title}'] ${title}",
+                "set dir[. = '${title}']/client[. = '${client}'] ${client}",
+            ],
             notify  => Exec['nfs-reload'],
         }
     } else {
         augeas{ "nfs export ${title}":
-            context => "/files/etc/exports",
+            context => '/files/etc/exports',
             changes => [
                         "rm dir[. = '${title}']",
                         ],

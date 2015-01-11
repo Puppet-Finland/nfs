@@ -7,8 +7,8 @@
 # definitions. You can use additional nfs:export::client resources to add 
 # different options to different clients.
 #
-# If you remove an export with ensure => absent argument, make sure there are no 
-# additional nfs::export::client definitions for this export path.
+# If you remove an export with ensure => absent argument, make sure there 
+# are no additional nfs::export::client definitions for this export path.
 #
 # == Parameters
 #
@@ -31,13 +31,13 @@ define nfs::export
 )
 {
     nfs::export::path { $title:
-        client => $client,
         ensure => $ensure,
+        client => $client,
     }
-    nfs::export::client { "${client} on ${path}":
+    nfs::export::client { "${client} on ${title}":
+        ensure  => $ensure,
         client  => $client,
         path    => $title,
         options => $options,
-        ensure  => $ensure,
     }
 }

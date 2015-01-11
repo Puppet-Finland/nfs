@@ -10,7 +10,7 @@
 class nfs::install inherits nfs::params {
 
     package { 'nfs-nfs-common':
-        name => $::nfs::params::nfs_common_package,
         ensure => 'installed',
+        name   => $::nfs::params::nfs_common_package,
     }
 }

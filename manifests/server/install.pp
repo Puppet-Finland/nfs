@@ -12,8 +12,8 @@ class nfs::server::install inherits nfs::params {
     # Install common NFS packages
     include nfs::install
 
-    package {"nfs-server":
-        name   => $::nfs::params::nfs_server_package,
+    package {'nfs-server':
         ensure => installed,
+        name   => $::nfs::params::nfs_server_package,
     }
 }
