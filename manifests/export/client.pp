@@ -38,8 +38,7 @@ define nfs::export::client
 
         }
         # Convert options array to augeas commands
-        $options_command_array = regsubst($options, '(.*)', \
-                "set option[. = '\1'] \1")
+        $options_command_array = regsubst($options, '(.*)', "set option[. = '\1'] \1")
 
         # Then, add extra command to remove all non-specified options. 
         # Format and join options array as:
